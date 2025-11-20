@@ -1,3 +1,15 @@
+<script setup lang="ts">
+import type { FilterType } from '~/composables/useTodos'
+
+const { filter, activeCount, completedCount, setFilter, clearCompleted } = useTodos()
+
+const filterOptions = computed(() => [
+  { value: 'all' as FilterType, label: 'All', count: activeCount.value + completedCount.value },
+  { value: 'active' as FilterType, label: 'Active', count: activeCount.value },
+  { value: 'completed' as FilterType, label: 'Completed', count: completedCount.value }
+])
+</script>
+
 <template>
   <div class="filters-container">
     <div class="filter-buttons">
@@ -24,18 +36,6 @@
     </button>
   </div>
 </template>
-
-<script setup lang="ts">
-import type { FilterType } from '~/composables/useTodos'
-
-const { filter, activeCount, completedCount, setFilter, clearCompleted } = useTodos()
-
-const filterOptions = computed(() => [
-  { value: 'all' as FilterType, label: 'All', count: activeCount.value + completedCount.value },
-  { value: 'active' as FilterType, label: 'Active', count: activeCount.value },
-  { value: 'completed' as FilterType, label: 'Completed', count: completedCount.value }
-])
-</script>
 
 <style scoped>
 .filters-container {

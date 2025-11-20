@@ -1,43 +1,3 @@
-<template>
-  <div class="todo-item" :class="{ completed: todo.completed, editing: isEditing }">
-    <label class="checkbox-container" v-if="!isEditing">
-      <input
-        type="checkbox"
-        :checked="todo.completed"
-        @change="handleToggle"
-        class="checkbox"
-      />
-      <span class="checkmark"></span>
-    </label>
-    
-    <div class="todo-content" @dblclick="startEditing">
-      <input
-        v-if="isEditing"
-        ref="editInput"
-        v-model="editText"
-        type="text"
-        class="edit-input"
-        @keyup.enter="saveEdit"
-        @keyup.escape="cancelEdit"
-        @blur="saveEdit"
-      />
-      <template v-else>
-        <p class="todo-text">{{ todo.text }}</p>
-        <span class="todo-date">{{ formattedDate }}</span>
-      </template>
-    </div>
-    
-    <button 
-      v-if="!isEditing"
-      class="delete-button"
-      @click="handleDelete"
-      title="Delete todo"
-    >
-      <span class="delete-icon">×</span>
-    </button>
-  </div>
-</template>
-
 <script setup lang="ts">
 import type { Todo } from '~/composables/useTodos'
 
@@ -91,6 +51,46 @@ const formattedDate = computed(() => {
   })
 })
 </script>
+
+<template>
+  <div class="todo-item" :class="{ completed: todo.completed, editing: isEditing }">
+    <label class="checkbox-container" v-if="!isEditing">
+      <input
+        type="checkbox"
+        :checked="todo.completed"
+        @change="handleToggle"
+        class="checkbox"
+      />
+      <span class="checkmark"></span>
+    </label>
+    
+    <div class="todo-content" @dblclick="startEditing">
+      <input
+        v-if="isEditing"
+        ref="editInput"
+        v-model="editText"
+        type="text"
+        class="edit-input"
+        @keyup.enter="saveEdit"
+        @keyup.escape="cancelEdit"
+        @blur="saveEdit"
+      />
+      <template v-else>
+        <p class="todo-text">{{ todo.text }}</p>
+        <span class="todo-date">{{ formattedDate }}</span>
+      </template>
+    </div>
+    
+    <button 
+      v-if="!isEditing"
+      class="delete-button"
+      @click="handleDelete"
+      title="Delete todo"
+    >
+      <span class="delete-icon">×</span>
+    </button>
+  </div>
+</template>
 
 <style scoped>
 .todo-item {

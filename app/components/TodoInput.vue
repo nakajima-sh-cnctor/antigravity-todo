@@ -1,3 +1,15 @@
+<script setup lang="ts">
+const { addTodo } = useTodos()
+const newTodoText = ref('')
+
+const handleAdd = () => {
+  if (newTodoText.value.trim()) {
+    addTodo(newTodoText.value)
+    newTodoText.value = ''
+  }
+}
+</script>
+
 <template>
   <div class="todo-input-container">
     <input
@@ -17,18 +29,6 @@
     </button>
   </div>
 </template>
-
-<script setup lang="ts">
-const { addTodo } = useTodos()
-const newTodoText = ref('')
-
-const handleAdd = () => {
-  if (newTodoText.value.trim()) {
-    addTodo(newTodoText.value)
-    newTodoText.value = ''
-  }
-}
-</script>
 
 <style scoped>
 .todo-input-container {

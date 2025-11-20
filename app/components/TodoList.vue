@@ -1,3 +1,18 @@
+<script setup lang="ts">
+const { todos, filter } = useTodos()
+
+const emptyMessage = computed(() => {
+  switch (filter.value) {
+    case 'active':
+      return 'No active todos. Great job!'
+    case 'completed':
+      return 'No completed todos yet'
+    default:
+      return 'No todos yet. Add one to get started!'
+  }
+})
+</script>
+
 <template>
   <div class="todo-list">
     <TransitionGroup name="list" tag="div" class="todo-items">
@@ -14,21 +29,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-const { todos, filter } = useTodos()
-
-const emptyMessage = computed(() => {
-  switch (filter.value) {
-    case 'active':
-      return 'No active todos. Great job!'
-    case 'completed':
-      return 'No completed todos yet'
-    default:
-      return 'No todos yet. Add one to get started!'
-  }
-})
-</script>
 
 <style scoped>
 .todo-list {
